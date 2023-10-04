@@ -1,13 +1,16 @@
+import Board from "./components/Board/Board";
+import GameConfig from "./components/GameConfig/GameConfig";
+import ModalAlert from "./components/ModalAlert/ModalAlert";
 
-const TicTacToe_App = () => {
-  return (
-    <>
-      <h2>TIC TAC TOE</h2>
-      <h2>TIC TAC TOE</h2>
-      <h2>TIC TAC TOE</h2>
-      <a href="#">TicTacToe Link</a>
-    </>
-  )
-}
+const TicTacToe_App: React.FC = () => {
+	return (
+		<>
+			<ModalAlert>
+				<GameConfig/>
+			</ModalAlert>
+			<Board/>
+		</>
+	);
+};
 
 export default TicTacToe_App;
