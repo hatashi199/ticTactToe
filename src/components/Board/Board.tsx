@@ -1,60 +1,41 @@
 import Cell from '../Cell/Cell';
-import { INITIAL_BOARD, winConditions } from '../../appConst';
 import { GameConfigTurnInterface } from '../GameConfig/useGameConfigTurn';
-import { useState } from 'react';
+import { useBoardGame } from './useBoardGame';
 
 interface BoardProps {
 	gameConfig: GameConfigTurnInterface;
 }
 
 const Board: React.FC<BoardProps> = ({ gameConfig }) => {
-	const [board, setBoard] = useState<(null | string)[]>(INITIAL_BOARD);
-    const [isFinished, setIsFinished] = useState<boolean>(false);
+	const { place_O, place_X, checkWin, isFinished, board } = useBoardGame();
 
 	const makeMovement = (position: number): void => {
-		const isValidPosition = position > 8;
+		const isValidPosition = position >= 0 && position > 8;
 
 		if (!isValidPosition && !isFinished) {
 			switch (gameConfig.gameConfigTurn) {
 				case 'O':
-					board[position] = 'O';
-					if (checkWinner(board)) {
-						console.log(`Ganador ${gameConfig.gameConfigTurn}`);
-                        setIsFinished(true);
-                    }
-					setBoard([...board]);
+					place_O({ position });
+
+					if (checkWin()) {
+						console.log('Juego finalizado');
+					}
+
 					gameConfig.setGameConfigX();
 					break;
 				case 'X':
-					board[position] = 'X';
-					if (checkWinner(board)) {
-                        console.log(`Ganador ${gameConfig.gameConfigTurn}`);
-                        setIsFinished(true);
-                    }
-					setBoard([...board]);
+					place_X({ position });
+
+					if (checkWin()) {
+						console.log('Juego finalizado');
+					}
+
 					gameConfig.setGameConfigO();
 					break;
 				default:
 					console.log('Error');
 			}
 		}
-	};
-
-	const checkWinner = (
-		board: (null | string)[]
-	): boolean => {
-		const hasWinner: undefined | number[] = winConditions.find(
-			([x, y, z]) =>
-				board[x] === board[y] &&
-				board[x] === board[z] &&
-				board[x] !== null
-		);
-
-		if (hasWinner) {
-			return true;
-		}
-
-		return false;
 	};
 
 	return (
