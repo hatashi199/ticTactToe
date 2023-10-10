@@ -39,44 +39,49 @@ const Board: React.FC<BoardProps> = ({ gameConfig }) => {
 	};
 
 	return (
-		<div className='flex flex-wrap max-w-[350px] w-full gap-[15px]'>
-			<Cell
-				value={board[0]}
-				setValue={() => makeMovement(0)}
-			/>
-			<Cell
-				value={board[1]}
-				setValue={() => makeMovement(1)}
-			/>
-			<Cell
-				value={board[2]}
-				setValue={() => makeMovement(2)}
-			/>
-			<Cell
-				value={board[3]}
-				setValue={() => makeMovement(3)}
-			/>
-			<Cell
-				value={board[4]}
-				setValue={() => makeMovement(4)}
-			/>
-			<Cell
-				value={board[5]}
-				setValue={() => makeMovement(5)}
-			/>
-			<Cell
-				value={board[6]}
-				setValue={() => makeMovement(6)}
-			/>
-			<Cell
-				value={board[7]}
-				setValue={() => makeMovement(7)}
-			/>
-			<Cell
-				value={board[8]}
-				setValue={() => makeMovement(8)}
-			/>
-		</div>
+		<>
+			<div className='flex flex-wrap max-w-[350px] w-full gap-[15px]'>
+				<Cell
+					value={board[0]}
+					setValue={() => makeMovement(0)}
+				/>
+				<Cell
+					value={board[1]}
+					setValue={() => makeMovement(1)}
+				/>
+				<Cell
+					value={board[2]}
+					setValue={() => makeMovement(2)}
+				/>
+				<Cell
+					value={board[3]}
+					setValue={() => makeMovement(3)}
+				/>
+				<Cell
+					value={board[4]}
+					setValue={() => makeMovement(4)}
+				/>
+				<Cell
+					value={board[5]}
+					setValue={() => makeMovement(5)}
+				/>
+				<Cell
+					value={board[6]}
+					setValue={() => makeMovement(6)}
+				/>
+				<Cell
+					value={board[7]}
+					setValue={() => makeMovement(7)}
+				/>
+				<Cell
+					value={board[8]}
+					setValue={() => makeMovement(8)}
+				/>
+			</div>
+			{gameConfig.gameConfigTurn && (
+				<h2>{`Turno de ${gameConfig.gameConfigTurn}`}</h2>
+			)}
+		</>
 	);
 };
 
