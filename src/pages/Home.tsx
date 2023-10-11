@@ -12,19 +12,33 @@ const Home: React.FC = () => {
 
 	return (
 		<CenterPageElement>
-			<div className='flex flex-col items-center gap-[15px] p-[15px]'>
-				<div className='flex gap-[10px]'>
-					<RxCross2 />
-					<FiCircle />
+			<div className='flex flex-col items-center gap-[20px] p-[15px]'>
+				<div className='flex gap-[6px]'>
+					<RxCross2
+						size={'32px'}
+						color={'#31c3bd'}
+					/>
+					<FiCircle
+						size={'32px'}
+						color={'#ffc860'}
+					/>
 				</div>
 				<GameConfig
+					gameConfigTurn={gameConfigTurn}
 					setGameConfigO={setGameConfigO}
 					setGameConfigX={setGameConfigX}
 				/>
 				{gameConfigTurn ? (
-					<Link to='/game'>NEW GAME</Link>
+					<Link
+						to='/game'
+						className='flex justify-center items-center w-[100%] bg-[#31c3bd] rounded-[10px] px-[30px] pb-[8px]'
+					>
+						NEW GAME
+					</Link>
 				) : (
-					<span>NEW GAME</span>
+					<button className='flex justify-center items-center w-[100%] bg-[#31c3bd] text-bgDark font-bold text-[1.5rem] rounded-[10px] px-[30px] pb-[8px] shadow-blueShadow'>
+						NEW GAME
+					</button>
 				)}
 			</div>
 		</CenterPageElement>
