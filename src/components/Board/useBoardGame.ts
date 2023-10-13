@@ -6,6 +6,7 @@ interface BoardGameInterface {
 	place_O: ({ position }: PlacePieceInterface) => void;
 	place_X: ({ position }: PlacePieceInterface) => void;
 	checkWin: () => boolean;
+	resetGame: () => void;
 	isFinished: boolean;
 	board: (string | null)[];
 }
@@ -40,10 +41,16 @@ export const useBoardGame = (): BoardGameInterface => {
 		return false;
 	};
 
+	const resetGame = (): void => {
+		setBoard(Array(9).fill(null));
+		setIsFinished(false);
+	};
+
 	return {
 		place_O,
 		place_X,
 		checkWin,
+		resetGame,
 		isFinished,
 		board
 	};
