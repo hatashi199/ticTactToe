@@ -3,37 +3,49 @@ import Cell from '../Cell/Cell';
 import { GameConfigTurnInterface } from '../GameConfig/useGameConfigTurn';
 import { useBoardGame } from './useBoardGame';
 import BoardHeader from '../BoardHeader/BoardHeader';
+import BoardFooter from '../BoardFooter/BoardFooter';
 
 interface BoardProps {
 	gameConfig: GameConfigTurnInterface;
 }
 
 const Board: React.FC<BoardProps> = ({ gameConfig }) => {
-	const { place_O, place_X, checkWin, resetGame, isFinished, board } =
-		useBoardGame();
+	const { ...boardGame } = useBoardGame();
 
 	const makeMovement = (position: number): void => {
 		const isValidPosition = position >= 0 && position > 8;
 
-		if (!isValidPosition && !isFinished) {
+		if (!isValidPosition && !boardGame.isFinished) {
 			switch (gameConfig.gameConfigTurn) {
 				case 'O':
-					if (board[position] === null) {
-						place_O({ position });
+					if (boardGame.board[position] === null) {
+						boardGame.place_O({ position });
 
-						if (checkWin()) {
+						if (boardGame.checkWin()) {
 							console.log('Juego finalizado');
+							break;
+						}
+
+						if (boardGame.isDraw()) {
+							console.log('Empate');
+							break;
 						}
 
 						gameConfig.setGameConfigX();
 					}
 					break;
 				case 'X':
-					if (board[position] === null) {
-						place_X({ position });
+					if (boardGame.board[position] === null) {
+						boardGame.place_X({ position });
 
-						if (checkWin()) {
+						if (boardGame.checkWin()) {
 							console.log('Juego finalizado');
+							break;
+						}
+
+						if (boardGame.isDraw()) {
+							console.log('Empate');
+							break;
 						}
 
 						gameConfig.setGameConfigO();
@@ -51,46 +63,52 @@ const Board: React.FC<BoardProps> = ({ gameConfig }) => {
 				<div className='flex flex-col max-w-[460px] w-full gap-[20px]'>
 					<BoardHeader
 						gameConfigTurn={gameConfig.gameConfigTurn}
-						resetGame={resetGame}
+						resetGame={boardGame.resetGame}
 					/>
 					<div className='flex flex-wrap w-full gap-[20px]'>
 						<Cell
-							value={board[0]}
+							value={boardGame.board[0]}
 							setValue={() => makeMovement(0)}
 						/>
 						<Cell
-							value={board[1]}
+							value={boardGame.board[1]}
 							setValue={() => makeMovement(1)}
 						/>
 						<Cell
-							value={board[2]}
+							value={boardGame.board[2]}
 							setValue={() => makeMovement(2)}
 						/>
 						<Cell
-							value={board[3]}
+							value={boardGame.board[3]}
 							setValue={() => makeMovement(3)}
 						/>
 						<Cell
-							value={board[4]}
+							value={boardGame.board[4]}
 							setValue={() => makeMovement(4)}
 						/>
 						<Cell
-							value={board[5]}
+							value={boardGame.board[5]}
 							setValue={() => makeMovement(5)}
 						/>
 						<Cell
-							value={board[6]}
+							value={boardGame.board[6]}
 							setValue={() => makeMovement(6)}
 						/>
 						<Cell
-							value={board[7]}
+							value={boardGame.board[7]}
 							setValue={() => makeMovement(7)}
 						/>
 						<Cell
-							value={board[8]}
+							value={boardGame.board[8]}
 							setValue={() => makeMovement(8)}
 						/>
 					</div>
+					<BoardFooter
+						winO={boardGame.scoreBoard.winO}
+						winX={boardGame.scoreBoard.winX}
+						draw={boardGame.scoreBoard.draw}
+					/>
+					<h3>{boardGame.finalResult}</h3>
 				</div>
 			) : (
 				<div className='max-w-[450px] w-full'>

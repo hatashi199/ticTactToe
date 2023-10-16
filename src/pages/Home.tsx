@@ -21,14 +21,14 @@ const Home: React.FC = () => {
 				{gameConfigTurn ? (
 					<Link
 						to='/game'
-						className='flex justify-center items-center w-[100%] bg-[#31c3bd] text-bgDark font-bold text-[1.5rem] rounded-[10px] px-[30px] pb-[8px] shadow-blueShadow'
+						className='flex justify-center items-center w-[100%] bg-[#31c3bd] text-bgDark font-bold text-[1.5rem] rounded-[10px] px-[30px] pb-[8px] shadow-blueShadow text-center'
 					>
 						NEW GAME
 					</Link>
 				) : (
 					<button
 						disabled
-						className='flex justify-center items-center w-[100%] bg-[#31c3bd] text-bgDark font-bold text-[1.5rem] rounded-[10px] px-[30px] pb-[8px] shadow-blueShadow'
+						className='flex justify-center items-center w-[100%] bg-[#31c3bd] text-bgDark font-bold text-[1.5rem] rounded-[10px] px-[30px] pb-[8px] shadow-blueShadow text-center'
 					>
 						NEW GAME
 					</button>

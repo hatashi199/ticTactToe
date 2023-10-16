@@ -13,11 +13,11 @@ const GameConfig: React.FC<GameConfigProps> = ({
 	setGameConfigX
 }) => {
 	return (
-		<div className='flex flex-col gap-[20px] items-center bg-bgSquare rounded-[10px] p-[24px] shadow-blackShadow'>
-			<h3 className='text-textDark font-bold uppercase'>
+		<div className='flex flex-col gap-[20px] items-center bg-bgSquare rounded-[10px] p-[24px] shadow-blackShadow max-w-[380px]'>
+			<h3 className='text-textDark font-bold uppercase text-center'>
 				Selecciona el símbolo de jugador 1
 			</h3>
-			<div className='flex gap-[10px] w-[100%]'>
+			<div className='flex flex-col gap-[10px] w-[100%]'>
 				<button
 					className='flex flex-1 justify-center items-center bg-textDark px-[30px] py-[10px] rounded-[10px]'
 					onClick={setGameConfigO}
@@ -37,8 +37,10 @@ const GameConfig: React.FC<GameConfigProps> = ({
 					/>
 				</button>
 			</div>
-			<h3 className='text-subtextDark font-bold uppercase'>
-				{`Recuerda: ${gameConfigTurn} va primero`}
+			<h3 className='text-subtextDark font-bold uppercase text-center'>
+				{gameConfigTurn
+					? `Recuerda: ${gameConfigTurn} va primero`
+					: `Selecciona quién va a empezar`}
 			</h3>
 		</div>
 	);
