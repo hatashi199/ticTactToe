@@ -8,6 +8,7 @@ interface BoardGameInterface {
 	checkWin: () => boolean;
 	isDraw: () => boolean;
 	resetGame: () => void;
+	resetAllGame: () => void;
 	isFinished: boolean;
 	board: (string | null)[];
 	scoreBoard: ScoreBoardInterface;
@@ -50,7 +51,7 @@ export const useBoardGame = (): BoardGameInterface => {
 			board[hasWinner[0]] === 'O' && setWinO((prev) => prev + 1);
 			board[hasWinner[0]] === 'X' && setWinX((prev) => prev + 1);
 			setIsFinished(true);
-			setFinalResult(`El ganador es: ${board[hasWinner[0]]}`);
+			setFinalResult(`El ganador es ${board[hasWinner[0]]}`);
 			return true;
 		}
 
@@ -73,6 +74,16 @@ export const useBoardGame = (): BoardGameInterface => {
 	const resetGame = (): void => {
 		setBoard(Array(9).fill(null));
 		setIsFinished(false);
+		setFinalResult('');
+	};
+
+	const resetAllGame = (): void => {
+		setBoard(Array(9).fill(null));
+		setIsFinished(false);
+		setFinalResult('');
+		setWinO(0);
+		setWinX(0);
+		setDraw(0);
 	};
 
 	return {
@@ -81,6 +92,7 @@ export const useBoardGame = (): BoardGameInterface => {
 		checkWin,
 		isDraw,
 		resetGame,
+		resetAllGame,
 		isFinished,
 		board,
 		scoreBoard: {

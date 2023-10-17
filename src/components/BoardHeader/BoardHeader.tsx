@@ -3,12 +3,12 @@ import { IoRefresh } from 'react-icons/io5';
 
 interface IconsLogoProps {
 	gameConfigTurn: string;
-	resetGame: () => void;
+	resetAllGame: () => void;
 }
 
 const BoardHeader: React.FC<IconsLogoProps> = ({
 	gameConfigTurn,
-	resetGame
+	resetAllGame
 }) => {
 	return (
 		<div className='flex items-center justify-between w-full'>
@@ -21,8 +21,8 @@ const BoardHeader: React.FC<IconsLogoProps> = ({
 				</h3>
 			</div>
 			<button
-				className='flex justify-center items-center bg-textDark rounded-[10px] p-[14px]'
-				onClick={resetGame}
+				className='flex justify-center items-center bg-textDark rounded-[10px] p-[14px] shadow-greyShadow'
+				onClick={resetAllGame}
 			>
 				<IoRefresh
 					size={'22px'}
